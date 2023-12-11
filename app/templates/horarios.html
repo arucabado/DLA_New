@@ -1,28 +1,30 @@
 {% extends "./base.html" %}
 
 {% block title %} Horarios de juego {% endblock %}
-
+{% block head %}
+<link href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" rel="stylesheet">
+{% endblock %}
 {% block body %}
 <div class="conteiner">
     <div class="row text-center">
         <h2>Division Latino</h2>
         <h2>Horarios Mundiales</h2>
     </div>
-    <table class="table">
+    <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Username</th>
-                <th scope="col">Nombre de usuario</th>
-                <th scope="col">Pais</th>
-                <th scope="col">Zona horaria</th>
-                <th scope="col">Hora Local</th>
+                <th>#</th>
+                <th>Username</th>
+                <th>Nombre de usuario</th>
+                <th>Pais</th>
+                <th>Zona horaria</th>
+                <th>Hora Local</th>
             </tr>
         </thead>
         <tbody>
             {% for miembro in miembros %}
             <tr>
-                <th scope="row">1</th>
+                <td>{{forloop.counter}}</td>
                 <td>{{miembro.user.username}}</td>
                 {% if miembro.mostrarnombre %}
                 <td>{{ miembro.user.first_name }} {{ miembro.user.last_name }}</td>
@@ -37,6 +39,8 @@
         </tbody>
     </table>
 </div>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script>
     // JavaScript para actualizar dinámicamente la hora cada segundo
     setInterval(function () {
@@ -48,5 +52,7 @@
             fila.children[5].textContent = horaActual;
         });
     }, 1000);
+    	
+    let table = new DataTable('#example');
 </script>
 {% endblock %}

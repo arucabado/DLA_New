@@ -3,3 +3,5 @@ $(document).ready(function() {
       $("#alerts").hide(6000);
       }, 3000);
   });
+
+  
